@@ -17,8 +17,7 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <Routes>
-        {/* <Route exact path="/events/new" component={EventsNew} /> */}
-        {/* <Route exact path="/" component={EventsIndex} /> */}
+        <Route exact path="/events/new" element={<EventsNew />} />
         <Route exact path="/" element={<EventsIndex />} />
       </Routes>
     </BrowserRouter>
