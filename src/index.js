@@ -4,15 +4,24 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import reducers from "./reducers";
 import thunk from "redux-thunk";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import "./index.css";
 import EventsIndex from "./components/events_index";
+import EventsNew from "./components/events_new";
 import reportWebVitals from "./reportWebVitals";
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
 ReactDOM.render(
   <Provider store={store}>
-    <EventsIndex />
+    <BrowserRouter>
+      <Routes>
+        {/* <Route exact path="/events/new" component={EventsNew} /> */}
+        {/* <Route exact path="/" component={EventsIndex} /> */}
+        <Route exact path="/" element={<EventsIndex />} />
+      </Routes>
+    </BrowserRouter>
   </Provider>,
   document.getElementById("root")
 );
