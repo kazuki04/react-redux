@@ -5,20 +5,27 @@ import { Provider } from "react-redux";
 import reducers from "./reducers";
 import thunk from "redux-thunk";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 import "./index.css";
 import EventsIndex from "./components/events_index";
 import EventsNew from "./components/events_new";
 import reportWebVitals from "./reportWebVitals";
 
+const enhancer =
+  process.env.NODE_ENV === "development"
+    ? composeWithDevTools(applyMiddleware(thunk))
+    : applyMiddleware(thunk);
 const store = createStore(reducers, applyMiddleware(thunk));
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <Routes>
-        <Route exact path="/events/new" element={<EventsNew />} />
+        <Route path="/events/new" element={<EventsNew />} />
+        <Route path="/events/id" element={<EventsShow />} />
         <Route exact path="/" element={<EventsIndex />} />
+        <Route exact path="/events" element={<EventsIndex />} />
       </Routes>
     </BrowserRouter>
   </Provider>,
